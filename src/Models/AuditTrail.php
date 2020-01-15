@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Kingsleyudenewu\AuditTrail\Models;
-
 
 class AuditTrail extends Model
 {
