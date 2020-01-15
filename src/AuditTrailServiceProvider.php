@@ -16,8 +16,8 @@ class AuditTrailServiceProvider extends ServiceProvider
          */
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'audit-trail');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'audit-trail');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
