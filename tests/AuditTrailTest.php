@@ -16,7 +16,7 @@ class AuditTrailTest extends TestCase
     protected function getPackageAliases($app)
     {
         return [
-            'AuditTrail' => AuditTrailFacade::class
+            'AuditTrail' => AuditTrailFacade::class,
         ];
     }
 }
