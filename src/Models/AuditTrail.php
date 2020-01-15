@@ -2,11 +2,10 @@
 
 namespace Kingsleyudenewu\AuditTrail\Models;
 
+use Illuminate\Database\Eloquent\Model;
+
 class AuditTrail extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'audit_trails';
-
     protected $guarded = ['id'];
 }
