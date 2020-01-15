@@ -53,7 +53,7 @@ class AuditTrailServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'audit-trail');
 
         // Register the main class to use with the facade
-        $this->app->singleton('audit-trail', function () {
+        $this->app->bind('audit-trail', function () {
             return new AuditTrail;
         });
     }
