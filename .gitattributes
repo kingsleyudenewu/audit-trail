@@ -10,3 +10,4 @@
 /tests              export-ignore
 /.editorconfig      export-ignore
 /.idea              export-ignore
+/build              export-ignore
