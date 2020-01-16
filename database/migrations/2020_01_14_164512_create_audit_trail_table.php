@@ -14,6 +14,7 @@ class CreateAuditTrailTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');
+            $table->string('model')->nullable();
             $table->string('comment')->nullable();
             $table->softDeletes();
             $table->timestamps();

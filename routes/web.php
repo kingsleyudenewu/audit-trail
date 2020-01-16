@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Kingsleyudenewu\AuditTrail\Models\AuditTrail;
+use Kingsleyudenewu\AuditTrail\AuditTrail;
 
 Route::group(['prefix' => 'audit'], function () {
     Route::get('/logs', function (){
-        $logs = AuditTrail::getAllLogs(25, true);
+        $logs = new AuditTrail();
+        $logs->getAllLogs(25, true);
         return response()->json([
             'status' => true,
             'message' => 'success',
