@@ -29,6 +29,7 @@ class AuditTrail
     {
         return \Kingsleyudenewu\AuditTrail\Models\AuditTrail::firstOrCreate([
             'user_id' => \Auth::id(),
+            'model' => get_class($this),
             'action' => $action,
             'comment' => $comment,
         ]);

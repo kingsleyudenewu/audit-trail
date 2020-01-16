@@ -3,19 +3,22 @@
 namespace Kingsleyudenewu\AuditTrail\Tests;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+//use Kingsleyudenewu\AuditTrail\AuditTrail;
 use Kingsleyudenewu\AuditTrail\AuditTrailFacade;
 use Kingsleyudenewu\AuditTrail\AuditTrailServiceProvider;
+use Kingsleyudenewu\AuditTrail\database\migrations\CreateAuditTrailTable;
+use Kingsleyudenewu\AuditTrail\Models\AuditTrail;
 use Orchestra\Testbench\TestCase;
 
 class AuditTrailTest extends TestCase
 {
-    use RefreshDatabase;
+//    use RefreshDatabase;
 
     public function setUp() : void
     {
         parent::setUp();
 
-        $this->artisan('migrate', ['--database' => 'testbench'])->run();
+//        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
     protected function getPackageProviders($app)
     {
@@ -37,20 +40,25 @@ class AuditTrailTest extends TestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        // Setup default database to use sqlite :memory:
-        $app['config']->set('database.default', 'testbench');
-        $app['config']->set('database.connections.testbench', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
-        ]);
+        include_once __DIR__.'/../database/migrations/create_audit_trail_table.php';
+        (new CreateAuditTrailTable)->up();
     }
 
-    /** @test */
-    public function create_audit_trails()
+
+    public function test_create_audit_trails()
     {
         $this->withoutExceptionHandling();
-        $a = $this->json('GET','/audit/logs');
-        dd($a);
+
+        $audit_trail = new AuditTrail();
+        $audit_trail->user_id = 1;
+        $audit_trail->action = 'Created audit trail';
+        $audit_trail->save();
+
+        $new_audit_trail = AuditTrail::first();
+
+        $this->assertNotNull($audit_trail);
+        $this->assertSame($new_audit_trail->action, 'Created audit trail');
+
+
     }
 }
