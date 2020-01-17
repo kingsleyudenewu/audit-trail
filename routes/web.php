@@ -5,13 +5,14 @@ use Kingsleyudenewu\AuditTrail\AuditTrail;
 use Kingsleyudenewu\AuditTrail\Models\AuditTrail as Audit;
 
 Route::group(['prefix' => 'audit'], function () {
-    Route::get('/logs', function (){
+    Route::get('/logs', function () {
         $logs = new AuditTrail();
         $logs->getAllLogs(25, true);
+
         return response()->json([
             'status' => true,
             'message' => 'success',
-            'data' => $logs
+            'data' => $logs,
         ]);
     });
 
