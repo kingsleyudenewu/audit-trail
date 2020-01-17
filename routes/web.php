@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Kingsleyudenewu\AuditTrail\AuditTrail;
+use Kingsleyudenewu\AuditTrail\Models\AuditTrail as Audit;
 
 Route::group(['prefix' => 'audit'], function () {
     Route::get('/logs', function (){
@@ -14,12 +15,13 @@ Route::group(['prefix' => 'audit'], function () {
         ]);
     });
 
-    Route::get('/logs/{id}', function ($id){
-        $user_log = AuditTrail::where('user_id', $id)->get();
+    Route::get('/logs/{id}', function ($id) {
+        $user_log = Audit::where('user_id', $id)->get();
+
         return response()->json([
             'status' => true,
             'message' => 'success',
-            'data' => $user_log
+            'data' => $user_log,
         ]);
     });
 });
