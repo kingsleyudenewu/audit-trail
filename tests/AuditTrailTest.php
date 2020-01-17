@@ -14,12 +14,13 @@ class AuditTrailTest extends TestCase
 {
 //    use RefreshDatabase;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         parent::setUp();
 
 //        $this->artisan('migrate', ['--database' => 'testbench'])->run();
     }
+
     protected function getPackageProviders($app)
     {
         return [AuditTrailServiceProvider::class];
@@ -35,12 +36,12 @@ class AuditTrailTest extends TestCase
     /**
      * Define environment setup.
      *
-     * @param  \Illuminate\Foundation\Application  $app
+     * @param \Illuminate\Foundation\Application $app
      * @return void
      */
     protected function getEnvironmentSetUp($app)
     {
-        include_once __DIR__.'/../database/migrations/create_audit_trail_table.php';
+        include_once __DIR__ . '/../database/migrations/create_audit_trail_table.php';
         (new CreateAuditTrailTable)->up();
     }
 
@@ -58,7 +59,16 @@ class AuditTrailTest extends TestCase
 
         $this->assertNotNull($audit_trail);
         $this->assertSame($new_audit_trail->action, 'Created audit trail');
+    }
 
+    public function test_when_aaction_is_not_inputed()
+    {
+        $audit_trail = new AuditTrail();
+        $audit_trail->user_id = 1;
+        $audit_trail->action = '';
+        $audit_trail->save();
 
+        $new_audit_trail = AuditTrail::first();
+//        $response->assertSessionHasErrors('title');
     }
 }
