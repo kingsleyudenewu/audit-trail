@@ -30,7 +30,7 @@ class AuditTrailTest extends TestCase
      */
     protected function getEnvironmentSetUp($app)
     {
-        include_once __DIR__.'/../database/migrations/create_audit_trail_table.php';
+        include_once __DIR__ . '/../database/migrations/create_audit_trail_table.php.stub';
         (new CreateAuditTrailTable)->up();
     }
 
