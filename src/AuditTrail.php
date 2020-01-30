@@ -25,11 +25,11 @@ class AuditTrail
         }
     }
 
-    public function log($action, $comment = null)
+    public function log($action, $model_type, $comment = null)
     {
         return \Kingsleyudenewu\AuditTrail\Models\AuditTrail::firstOrCreate([
             'user_id' => \Auth::id(),
-            'model' => get_class($this),
+            'model' => $model_type,
             'action' => $action,
             'comment' => $comment,
         ]);
